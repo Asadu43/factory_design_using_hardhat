@@ -105,15 +105,6 @@ const config: HardhatUserConfig = {
           }
         }
       },
-      {
-        version: "0.9.0",
-        settings: {
-          optimizer: {
-            runs: 200,
-            enabled: true
-          }
-        }
-      }
     ],
   },
   defaultNetwork: "hardhat",

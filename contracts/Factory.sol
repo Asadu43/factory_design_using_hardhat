@@ -1,14 +1,13 @@
 // SPDX-License-Identifier: MIT
-pragma solidity >=0.6.0 <0.9.0;
+pragma solidity >=0.6.0 < 0.9.0;
 
 import "./AsadTokenERC721.sol";
 import "./AsadTokenERC20.sol";
 import "hardhat/console.sol";
-import "./OwnerRegistry.sol";
 import "./IFactory.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract Factory is Ownable, OwnersRegistry,IFactory {
+contract Factory is Ownable,IFactory {
     AsadTokenERC20[] public token20;
     AsadTokenERC721[] public token721;
 
@@ -53,10 +52,10 @@ contract Factory is Ownable, OwnersRegistry,IFactory {
 
     function createChildERC20() public {
         require(paused == false, "Can't Create Contact");
-        AsadTokenERC20 child = new AsadTokenERC20(address(this));
+        AsadTokenERC20 child = new AsadTokenERC20(address(this),msg.sender);
         console.log("ChildAddress: ", address(child));
         token20.push(child);
-        setERC20TokenOwner(address(child), msg.sender);
+        // setERC20TokenOwner(address(child), msg.sender);
         emit Erc20Event(address(child),msg.sender);
     }
 
@@ -64,7 +63,7 @@ contract Factory is Ownable, OwnersRegistry,IFactory {
         require(paused == false, "Can't Create Contact");
         AsadTokenERC721 child = new AsadTokenERC721(address(this));
         token721.push(child);
-        setNFTTokenOwner(address(child), msg.sender);
+        // setNFTTokenOwner(address(child), msg.sender);
        emit Erc721Event(address(child),msg.sender);
     }
 

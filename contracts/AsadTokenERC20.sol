@@ -10,8 +10,9 @@ contract AsadTokenERC20 is ERC20, Pausable, Ownable {
 
     IFactory iFactory;
 
-    constructor(address _iFactory) ERC20("AsadTokenERC20", "ASD") {
+    constructor(address _iFactory,address admin) ERC20("AsadTokenERC20", "ASD") {
         iFactory = IFactory(_iFactory); 
+        transferOwnership(admin);
     }
 
     modifier PausedAll(){
