@@ -70,15 +70,6 @@ const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
-        version: "0.6.0",
-        settings: {
-          optimizer: {
-            runs: 200,
-            enabled: true
-          }
-        }
-      },
-      {
         version: "0.7.6",
         settings: {
           optimizer: {
@@ -96,16 +87,10 @@ const config: HardhatUserConfig = {
           }
         }
       },
-      {
-        version: "0.8.0",
-        settings: {
-          optimizer: {
-            runs: 200,
-            enabled: true
-          }
-        }
-      },
     ],
+    // overrides:{
+    //   "contracts/AsadTokenERC20.sol:"
+    // }
   },
   defaultNetwork: "hardhat",
   networks: {
@@ -206,9 +191,9 @@ const config: HardhatUserConfig = {
     }
   },
   gasReporter: {
-    enabled: process.env.REPORT_GAS !== undefined,
+    enabled: true,
     currency: "USD",
-    gasPrice: 10
+    noColors: false
   },
   abiExporter: {
     path: './data/abi',
